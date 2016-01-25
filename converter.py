@@ -2,8 +2,11 @@ import xlrd
 import csv
 import os
 
-out_directory = os.path.dirname(__file__) + "/output"  # Define the output directory path
-resources_directory = os.path.dirname(__file__) + "/resources"  # Define the source files directory path
+out_directory = os.path.dirname(os.path.realpath(__file__)) + "/output"  # Define the output directory path
+# Create /output directory if it doesn't exist
+if not os.path.exists(out_directory):
+    os.makedirs(out_directory)
+resources_directory = os.path.dirname(os.path.realpath(__file__)) + "/resources"  # Define the source files directory path
 template_file = resources_directory + "/Item.csv"  # Define the template file located in /resources
 # Define the filename without extension, it will help create output file with the same name
 # as input file but with another extension
@@ -11,9 +14,7 @@ filename = "/test"  # This will be the name of output file without extension
 destination_file = out_directory + ''.join([filename, '.csv'])  # Append file format for output csv file
 excel_file = resources_directory + filename + '.xlsx'  # Append file format for input xlsx file
 
-# Create /output directory if it's not already exist
-if not os.path.exists(out_directory):
-    os.makedirs(out_directory)
+
 
 
 # This function will create copy of template file and will append rows from excel file
